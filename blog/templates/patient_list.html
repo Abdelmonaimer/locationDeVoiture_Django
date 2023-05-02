@@ -1,0 +1,43 @@
+{% extends 'header.html' %}
+
+{% block content %}
+
+<div class="float-end">
+<a class="btn btn-success" href="{% url 'create_patient' %}">Create new Patient</a>
+</div>
+<form class="d-flex" role="search" action="{% url 'search' %}">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
+    <button class="btn btn-outline-success" type="submit">Recherche</button>
+</form>
+<table id="bootstrapdatatable" class="table table-striped">
+    <thead>
+    <th>id</th>
+    <th>nom</th>
+    <th>date</th>
+    <th>malade</th>
+    <th>Actions</th>
+    </thead>
+    <tbody>
+        {% for pt in patient  %}
+            <tr>
+            <td>{{ pt.id }}</td>
+            <td>{{ pt.nom }}</td>
+            <td>{{ pt.dateNaissance }}</td>
+            <td>{{ pt.malade }}</td>
+                <td><a class="btn btn-primary"  >Afficher</a> <a class="btn btn-success" href="{% url 'update_patient' pt.id %}">Edit</a> <a class="btn btn-danger" href="{% url 'delete_patient' pt.id %}">Delete</a> </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+    <div class="pagination">
+        {% for i in patient.paginator.page_range %}
+            {% if patient.number == i %}
+                <span class="btn btn-primary active">{{ i }}</span>
+            {% else %}
+            <a href="?page={{ i }}" class="btn btn-outline-primary">{{ i }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+
+{% endblock %}

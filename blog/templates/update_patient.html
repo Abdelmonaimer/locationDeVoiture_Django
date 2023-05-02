@@ -1,0 +1,11 @@
+{% extends 'header.html' %}
+
+{% block content %}
+<h1>Update patient {{ patient.nom }}</h1>
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary">Save changes</button>
+    </form>
+
+{% endblock %}
