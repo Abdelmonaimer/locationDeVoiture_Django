@@ -20,11 +20,17 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" href="#">About us</a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" href="#">Contact</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}">Login</a>
         </li>
 
       </ul>
@@ -33,8 +39,22 @@
 </nav>
 </header>
 <body>
-{% block content %}{% endblock content %}
+<div class="container">
+    {% block content %}
+    {% if messeges %}
+        {% for message in messages %}
 
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+               {{ messages }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+
+
+    {% endif %}
+
+    {% endblock content %}
+</div>>
 </body>
 <footer class="footer mt-auto py-3 bg-light">
   <div class="container align-center text-center">

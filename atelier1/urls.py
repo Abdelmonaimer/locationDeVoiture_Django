@@ -35,6 +35,8 @@ urlpatterns = [
     path('patient', views.patient_list, name='patient'),
     path('create_patient', views.create_patient, name='create_patient'),
     path('update_patient/<int:pk>', views.update_patient, name='update_patient'),
+    path('members/', include('django.contrib.auth.urls')),
+    path('members/', include('members.urls')),
     path('delete_patient/<int:pk>', views.delete_patient, name='delete_patient')
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
