@@ -1,6 +1,7 @@
-from django.shortcuts import render , redirect
-from django.contrib.auth import authenticate , login , logout
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+
 
 def login_user(request):
     if request.method == "POST":
@@ -9,12 +10,9 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
-
+            return redirect('cars_dash')
         else:
             messages.success(request, ("Erreur de connexion"))
             return redirect('login')
-
-        ...
-    return render(request, 'authenticate/login.html', {})
-
+    else:
+        return render(request, 'authenticate/login.html', {})

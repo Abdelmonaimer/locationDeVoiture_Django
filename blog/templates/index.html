@@ -3,7 +3,7 @@
 
   <head>
    {% load static %}
-    <title>Car Rent &mdash; Free Website Template by Colorlib</title>
+    <title>AutoGo</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -47,16 +47,16 @@
 
             <div class="col-3 ">
               <div class="site-logo">
-                <a href="home">CarRent</a>
+                <a href="home">AutoGo</a>
               </div>
             </div>
 
             <div class="col-9  text-right">
-              
+
 
               <span class="d-inline-block d-lg-none"><a href="#" class="text-white site-menu-toggle js-menu-toggle py-5 text-white"><span class="icon-menu h3 text-white"></span></a></span>
 
-              
+
 
               <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
                 <ul class="site-menu main-menu js-clone-nav ml-auto ">
@@ -70,7 +70,7 @@
               </nav>
             </div>
 
-            
+
           </div>
         </div>
 
@@ -80,110 +80,57 @@
       <div class="ftco-cover-1 overlay" style="background-image: url('/static/images/hero_1.jpg')">
         <div class="container">
           <div class="row align-items-center">
+
             <div class="col-lg-5">
               <div class="feature-car-rent-box-1">
-                <h3>Range Rover S7</h3>
+                <h3>{{ car.marque }}</h3>
                 <ul class="list-unstyled">
                   <li>
                     <span>Doors</span>
-                    <span class="spec">4</span>
+                    <span class="spec">{{ car.doors }}</span>
                   </li>
                   <li>
                     <span>Seats</span>
-                    <span class="spec">6</span>
+                    <span class="spec">{{ car.seats }}</span>
                   </li>
                   <li>
-                    <span>Lugage</span>
-                    <span class="spec">2 Suitcase/2 Bags</span>
+                    <span>Color</span>
+                    <span class="spec">{{ car.color }}</span>
                   </li>
                   <li>
-                    <span>Transmission</span>
-                    <span class="spec">Automatic</span>
+                    <span>Type</span>
+                    <span class="spec">{{ car.type }}</span>
                   </li>
                   <li>
-                    <span>Minium age</span>
-                    <span class="spec">Automatic</span>
+                    <span>Modele</span>
+                    <span class="spec">{{ car.modele }}</span>
                   </li>
                 </ul>
                 <div class="d-flex align-items-center bg-light p-3">
-                  <span>$150/day</span>
-                  <a href="contact" class="ml-auto btn btn-primary">Rent Now</a>
+
+                  <a href="{% url 'reserver_car' car.id %}" class="ml-auto btn btn-primary">Rent Now</a>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
     </div>
 
-    <div class="site-section pt-0 pb-0 bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            
-              <form class="trip-form">
-                <div class="row align-items-center mb-4">
-                  <div class="col-md-6">
-                    <h3 class="m-0">Begin your trip here</h3>
-                  </div>
-                  <div class="col-md-6 text-md-right">
-                    <span class="text-primary">32</span> <span>cars available</span></span>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="form-group col-md-3">
-                    <label for="cf-1">Where you from</label>
-                    <input type="text" id="cf-1" placeholder="Your pickup address" class="form-control">
-                  </div>
-                  <div class="form-group col-md-3">
-                    <label for="cf-2">Where you go</label>
-                    <input type="text" id="cf-2" placeholder="Your drop-off address" class="form-control">
-                  </div>
-                  <div class="form-group col-md-3">
-                    <label for="cf-3">Journey date</label>
-                    <input type="text" id="cf-3" placeholder="Your pickup address" class="form-control datepicker px-3">
-                  </div>
-                  <div class="form-group col-md-3">
-                    <label for="cf-4">Return date</label>
-                    <input type="text" id="cf-4" placeholder="Your pickup address" class="form-control datepicker px-3">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-6">
-                    <input type="submit" value="Submit" class="btn btn-primary">
-                  </div>
-                </div>
-              </form>
-            </div>
-        </div>
-      </div>
-    </div>
-
-    
 
     <div class="site-section bg-light">
       <div class="container">
         <div class="row">
-          <div class="col-lg-3">
-            <h3>Our Offer</h3>
-            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure nesciunt nemo vel earum maxime neque!</p>
-            <p>
-              <a href="#" class="btn btn-primary custom-prev">Previous</a>
-              <span class="mx-2">/</span>
-              <a href="#" class="btn btn-primary custom-next">Next</a>
-            </p>
-          </div>
-          <div class="col-lg-9">
 
+            {% for c in cars %}
+          <div class="col-lg-4 col-md-6 mb-4">
 
-
-
-            <div class="nonloop-block-13 owl-carousel">
               <div class="item-1">
-                <a href="#"><img src="/static/img_1.jpg" alt="Image" class="img-fluid"></a>
+                <a href="#"><img src="{{ c.image.url }}" alt="Image" class="img-fluid" style="height: 300px !important;"></a>
                 <div class="item-1-contents">
                   <div class="text-center">
-                  <h3><a href="#">Range Rover S64 Coupe</a></h3>
+                  <h3><a href="#">{{ c.marque }}</a></h3>
                   <div class="rating">
                     <span class="icon-star text-warning"></span>
                     <span class="icon-star text-warning"></span>
@@ -191,74 +138,32 @@
                     <span class="icon-star text-warning"></span>
                     <span class="icon-star text-warning"></span>
                   </div>
-                  <div class="rent-price"><span>$250/</span>day</div>
                   </div>
                   <ul class="specs">
                     <li>
                       <span>Doors</span>
-                      <span class="spec">4</span>
+                      <span class="spec">{{ c.doors }}</span>
                     </li>
                     <li>
                       <span>Seats</span>
-                      <span class="spec">5</span>
+                      <span class="spec">{{ c.seats }}</span>
                     </li>
                     <li>
-                      <span>Transmission</span>
-                      <span class="spec">Automatic</span>
+                      <span>Type</span>
+                      <span class="spec">{{ c.type }}</span>
                     </li>
                     <li>
-                      <span>Minium age</span>
-                      <span class="spec">18 years</span>
+                      <span>Modele</span>
+                      <span class="spec">{{ c.modele }}</span>
                     </li>
                   </ul>
                   <div class="d-flex action">
-                    <a href="contact.html" class="btn btn-primary">Rent Now</a>
+                    <a href="{% url 'reserver_car' c.id %}" class="btn btn-primary">Rent Now</a>
                   </div>
                 </div>
               </div>
-
-
-              <div class="item-1">
-                <a href="#"><img src="/static/images/img_1.jpg" alt="Image" class="img-fluid"></a>
-                <div class="item-1-contents">
-                  <div class="text-center">
-                  <h3><a href="#">Range Rover S64 Coupe</a></h3>
-                  <div class="rating">
-                    <span class="icon-star text-warning"></span>
-                    <span class="icon-star text-warning"></span>
-                    <span class="icon-star text-warning"></span>
-                    <span class="icon-star text-warning"></span>
-                    <span class="icon-star text-warning"></span>
-                  </div>
-                  <div class="rent-price"><span>$250/</span>day</div>
-                  </div>
-                  <ul class="specs">
-                    <li>
-                      <span>Doors</span>
-                      <span class="spec">4</span>
-                    </li>
-                    <li>
-                      <span>Seats</span>
-                      <span class="spec">5</span>
-                    </li>
-                    <li>
-                      <span>Transmission</span>
-                      <span class="spec">Automatic</span>
-                    </li>
-                    <li>
-                      <span>Minium age</span>
-                      <span class="spec">18 years</span>
-                    </li>
-                  </ul>
-                  <div class="d-flex action">
-                    <a href="contact" class="btn btn-primary">Rent Now</a>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-            
           </div>
+            {% endfor %}
         </div>
       </div>
     </div>
@@ -267,7 +172,7 @@
       <div class="container">
         <div class="row">
           <div class="col-12 text-center mb-5">
-            <h2 class="text-white">Our services</h2>
+            <h2 class="text-white">Nos services</h2>
           </div>
         </div>
         <div class="row">
@@ -278,7 +183,7 @@
               </span>
               <div class="service-1-contents">
                 <h3>Repair</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, laboriosam.</p>
+                <p>Nous offrons un service de réparation rapide et efficace pour tous nos véhicules de location, assurant une expérience de conduite sans soucis.</p>
               </div>
             </div>
           </div>
@@ -289,7 +194,7 @@
               </span>
               <div class="service-1-contents">
                 <h3>Car Accessories</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, laboriosam.</p>
+                <p>Nous proposons une gamme d'accessoires de voiture pour améliorer votre expérience de conduite, tels que des GPS, des sièges pour enfants et des porte-bagages.</p>
               </div>
             </div>
           </div>
@@ -300,7 +205,7 @@
               </span>
               <div class="service-1-contents">
                 <h3>Own a Car</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, laboriosam.</p>
+                <p>Si vous cherchez à posséder une voiture, consultez notre inventaire de voitures d'occasion de haute qualité à des prix abordables.</p>
               </div>
             </div>
           </div>
@@ -313,7 +218,7 @@
       <div class="row justify-content-center text-center">
         <div class="col-7 text-center mb-5">
           <h2>How it works</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo assumenda, dolorum necessitatibus eius earum voluptates sed!</p>
+          <p>Notre processus d'acquisition de voitures d'occasion est facile et pratique. Choisissez l'heure et l'endroit, la voiture, fournissez les détails, passez à la caisse et c'est fait. Obtenez votre propre voiture aujourd'hui!</p>
         </div>
       </div>
       <div class="how-it-works d-flex">
@@ -340,21 +245,21 @@
 
       </div>
     </div>
-    
-    
+
+
     <div class="site-section bg-light">
       <div class="container">
         <div class="row justify-content-center text-center mb-5">
           <div class="col-7 text-center mb-5">
             <h2>Customer Testimony</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo assumenda, dolorum necessitatibus eius earum voluptates sed!</p>
+            <p></p>
           </div>
         </div>
         <div class="row">
           <div class="col-lg-4 mb-4 mb-lg-0">
             <div class="testimonial-2">
               <blockquote class="mb-4">
-                <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, deserunt eveniet veniam. Ipsam, nam, voluptatum"</p>
+                <p>"La location de voiture était facile et abordable. Le service client était excellent et la voiture était en parfait état."</p>
               </blockquote>
               <div class="d-flex v-card align-items-center">
                 <img src="/static/images/person_1.jpg" alt="Image" class="img-fluid mr-3">
@@ -365,7 +270,7 @@
           <div class="col-lg-4 mb-4 mb-lg-0">
             <div class="testimonial-2">
               <blockquote class="mb-4">
-                <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, deserunt eveniet veniam. Ipsam, nam, voluptatum"</p>
+                <p>"J'ai loué une voiture chez eux et j'ai été ravi de la qualité du service client et de la voiture elle-même."</p>
               </blockquote>
               <div class="d-flex v-card align-items-center">
                 <img src="/static/images/person_2.jpg" alt="Image" class="img-fluid mr-3">
@@ -376,7 +281,7 @@
           <div class="col-lg-4 mb-4 mb-lg-0">
             <div class="testimonial-2">
               <blockquote class="mb-4">
-                <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, deserunt eveniet veniam. Ipsam, nam, voluptatum"</p>
+                <p>"La voiture que j'ai louée était en parfait état et le service clientèle était exceptionnel. Je recommande fortement!" - Client satisfait."</p>
               </blockquote>
               <div class="d-flex v-card align-items-center">
                 <img src="/static/images/person_3.jpg" alt="Image" class="img-fluid mr-3">
@@ -394,7 +299,7 @@
         <div class="row justify-content-center text-center mb-5">
           <div class="col-7 text-center mb-5">
             <h2>Our Blog</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo assumenda, dolorum necessitatibus eius earum voluptates sed!</p>
+            <p>Découvrez notre blog pour des astuces de voyage, des guides de conduite et des recommandations pour profiter au maximum de votre location de voiture.</p>
           </div>
         </div>
 
@@ -406,10 +311,10 @@
                  class="img-fluid">
               </a>
               <div class="post-entry-1-contents">
-                
-                <h2><a href="single">The best car rent in the entire planet</a></h2>
+
+                <h2><a href="single">Votre comfort est une priorité!</a></h2>
                 <span class="meta d-inline-block mb-3">July 17, 2019 <span class="mx-2">by</span> <a href="#">Admin</a></span>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores eos soluta, dolore harum molestias consectetur.</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -420,10 +325,10 @@
                  class="img-fluid">
               </a>
               <div class="post-entry-1-contents">
-                
-                <h2><a href="single">The best car rent in the entire planet</a></h2>
+
+                <h2><a href="single">La meilleure location de voiture au Maroc.</a></h2>
                 <span class="meta d-inline-block mb-3">July 17, 2019 <span class="mx-2">by</span> <a href="#">Admin</a></span>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores eos soluta, dolore harum molestias consectetur.</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -435,10 +340,10 @@
                  class="img-fluid">
               </a>
               <div class="post-entry-1-contents">
-                
-                <h2><a href="single">The best car rent in the entire planet</a></h2>
+
+                <h2><a href="single">Voiture Sport avec les meilleurs prix!</a></h2>
                 <span class="meta d-inline-block mb-3">July 17, 2019 <span class="mx-2">by</span> <a href="#">Admin</a></span>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores eos soluta, dolore harum molestias consectetur.</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -446,47 +351,17 @@
       </div>
     </div>
 
-    
+
 
     <footer class="site-footer">
       <div class="container">
         <div class="row">
           <div class="col-lg-3">
             <h2 class="footer-heading mb-4">About Us</h2>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                <p>Notre blog est conçu pour vous aider à planifier votre voyage de location de voiture. Des conseils de voyage aux astuces de conduite, en passant par les destinations à visiter, notre blog a tout ce dont vous avez besoin pour une expérience de voyage inoubliable. </p>
           </div>
           <div class="col-lg-8 ml-auto">
             <div class="row">
-              <div class="col-lg-3">
-                <h2 class="footer-heading mb-4">Quick Links</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Terms of Service</a></li>
-                  <li><a href="#">Privacy</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
-              </div>
-              <div class="col-lg-3">
-                <h2 class="footer-heading mb-4">Quick Links</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Terms of Service</a></li>
-                  <li><a href="#">Privacy</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
-              </div>
-              <div class="col-lg-3">
-                <h2 class="footer-heading mb-4">Quick Links</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Terms of Service</a></li>
-                  <li><a href="#">Privacy</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
-              </div>
               <div class="col-lg-3">
                 <h2 class="footer-heading mb-4">Quick Links</h2>
                 <ul class="list-unstyled">
@@ -505,7 +380,7 @@
             <div class="border-top pt-5">
               <p>
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="about" target="_blank" >TEAM</a>
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             </p>
             </div>
@@ -534,4 +409,3 @@
   </body>
 
 </html>
-
