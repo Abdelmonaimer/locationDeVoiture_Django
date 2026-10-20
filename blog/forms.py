@@ -18,9 +18,9 @@ class PatientForm(forms.ModelForm):
 class CarsForm(forms.ModelForm):
     class Meta:
         model = Voiture
-        fields = ['marque', 'modele', 'type', 'color', 'doors', 'image', 'seats']
-        widgets = {
-            'marque': forms.TextInput(attrs={'class': 'form-control'}),
+        fields = ['marque', 'modele', 'type', 'color', 'doors', 'image', 'seats'] # les champs or inputs li biti ytzado flform bach t3mrhom
+        widgets = { ## had widget tandiroha bach n customiziw dok les champs (hna drnahom b bootstrap)
+            'marque': forms.TextInput(attrs={'class': 'form-control'}), ## <input type="text" class="form-control" />
             'modele': forms.TextInput(attrs={'class': 'form-control'}),
             'type': forms.TextInput(attrs={'class': 'form-control'}),
             'color': forms.TextInput(attrs={'class': 'form-control'}),

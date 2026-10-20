@@ -121,26 +121,26 @@ def logoutUser(request):
 
 
 def home2(request):
-    car = Voiture.objects.last()
-    cars = Voiture.objects.all()
+    car = Voiture.objects.last() # hadi bach kanjibo akhir insertion fla classe Voiture (table voiture f database) stockinaha f variable smitha car
+    cars = Voiture.objects.all() # hadi bach kanjibo ga3 les insertions (ga3 rows) fla classe Voiture (table voiture f database) stockinaha f variable smitha cars
     context = {
         'car': car,
         'cars': cars,
-    }
-    return render(request, "index.html", context)
+    } # context 7tina fiha les variables li lfo9 bach nseftohom l page html index.html
+    return render(request, "index.html", context) # return render seftna fiha les parametres ## hadi hya lview dyal page home
 
 
 def services(request):
-    return render(request, "services.html")
+    return render(request, "services.html") ## view dyal page services and since its static drna fiha ghi return dyal page html
 
 
 def cars(request):
-    car_list = Voiture.objects.all()
-    return render(request, "cars.html", {'car_list': car_list})
+    car_list = Voiture.objects.all() ## same as above stockina ga3 lcars li 3ndna f database f variable car_list
+    return render(request, "cars.html", {'car_list': car_list}) ## again seftnahaa f parameter
 
 
-@login_required(login_url='login')
-@allowed_users(allowed_roles=['admin', 'manager'])
+@login_required(login_url='login') ## hadi kadirha fo9 ay page mabghitihch ydkhol liha bla login i mean blama ykon connected dakshi 3lash smitha login_required
+@allowed_users(allowed_roles=['admin', 'manager']) # hadi bghina dashboard y9dr ydkhol lih gha admin w manager ila kan chi user maydkholch allowed_users
 def cars_dash(request):
     for i in range(0):
         v = Voiture(
@@ -152,9 +152,9 @@ def cars_dash(request):
             image=f.word(),
             seats=f.random_int(),
 
-        )
-        v.save()
-    cars = Voiture.objects.all()
+        ) ## hada ghir faker knt dkhlt biha fake data bach ntesti so nevermind
+        v.save() ## dave data f databse gha dyal faker hadi so nvm 2
+    cars = Voiture.objects.all() ## fhmtoha yak ?
     paginator = Paginator(cars, 4)
     page = request.GET.get('page', 1)
     try:
@@ -162,29 +162,29 @@ def cars_dash(request):
     except PageNotAnInteger:
         cars = paginator.page(1)
     except EmptyPage:
-        cars = paginator.page(paginator.num_pages)
+        cars = paginator.page(paginator.num_pages) ## had lcode li lfo9 kaml dyal paginator howa bach kandiro pagination tbh mafahmoch mzyn ila swlna angolo lih 3titih lina f cours drna bhalo wsf
     return render(request, "cars_dash.html", {'cars': cars})
 
 
-@login_required(login_url='login')
+@login_required(login_url='login') ## same as above hadi kandiroha k ay haja requires the login
 @allowed_users(allowed_roles=['admin', 'manager'])
 def add_car(request):
-    if request.method == 'POST':
-        form = CarsForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('cars_dash')
+    if request.method == 'POST': ## had if drnaha and it means ila drti submit l form 3ad tadir hadshi li lt7t
+        form = CarsForm(request.POST, request.FILES) ## hadi 7tina fiha lform li drna f forms.py normally hadi tatkon fiha request.post f parametre ms hadi zdna fiha ta dik request.FILE 3la wed insertion dyal image flcar
+        if form.is_valid(): ## ila kant lform valid (les champs 3amrin etc..) ghaydir hadshi li lt7t
+            form.save() ## method .save() kayna f django tatsavi lik dok data li jaw flform f database
+            return redirect('cars_dash') ## mn b3d kaydik l dashboard tl cars tani hya "cars_dash"
     else:
-        form = CarsForm()
+        form = CarsForm() ## else ila makanch dakshi valid taykhlik f nfs lform again
     return render(request, 'add_car.html', {'form': form})
 
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin', 'manager'])
-def update_car(request, pk):
-    car = get_object_or_404(Voiture, pk=pk)
-    if request.method == 'POST':
-        form = CarsForm(request.POST, request.FILES, instance=car)
+def update_car(request, pk): ## hna normalement tansefto gha request but since bghina ndiro edit f data aykhsna l id dyal hadik li bina n editiw
+    car = get_object_or_404(Voiture, pk=pk) ## variable 7tina fiha dik lcar li jbna bl id dyalha
+    if request.method == 'POST': ## again ila t submita dakshi
+        form = CarsForm(request.POST, request.FILES, instance=car) ## hna tani tanjibo lform mn forms.py o tanzido wahd instance car bach tatji lform 3amra b data (car) nta katbdl gha dik li bghiti
         if form.is_valid():
             form.save()
             return redirect('cars_dash')
@@ -198,7 +198,7 @@ def update_car(request, pk):
 def delete_car(request, pk):
     voiture = get_object_or_404(Voiture, pk=pk)
 
-    voiture.delete()
+    voiture.delete() ## had lview same as update tatjib id (li howa pk) w tadir fonction
     return redirect('cars_dash')
 
 
@@ -214,7 +214,7 @@ def employees_dash(request):
 
         )
         e.save()
-    employees = Employee.objects.all()
+    employees = Employee.objects.all() ## dashboard dyal les employees bhaaalo bhal cars tayjibhom kamlin o tay7thom lik
     return render(request, "Employees_dash.html", {'employees': employees})
 
 
@@ -268,7 +268,7 @@ def clients_dash(request):
         )
         c.save()
     clients = Client.objects.all()
-    paginator = Paginator(clients, 13)
+    paginator = Paginator(clients, 8)
     page = request.GET.get('page', 1)
     try:
         clients = paginator.page(page)
@@ -341,7 +341,7 @@ def reservations_dash(request):
         )
         r.save()
     reservations = Reservation.objects.all()
-    paginator = Paginator(reservations, 10)
+    paginator = Paginator(reservations, 8)
     page = request.GET.get('page', 1)
     try:
         reservations = paginator.page(page)
@@ -367,14 +367,14 @@ def update_reservation(request, pk):
 
 
 def reserver_car(request, pk):
-    car = get_object_or_404(Voiture, pk=pk)
+    car = get_object_or_404(Voiture, pk=pk) ## jbna voiture li bghina nreserviw bl id dyalha (pk)
     if request.method == 'POST':
         form = CarsForm(request.POST, request.FILES, instance=car)
-        date_format = "%Y-%m-%d"
+        date_format = "%Y-%m-%d" ## drna wahd lformat li ghatrespectiha dik la date li ghanjibo
         dateDebut = datetime.datetime.strptime(str(request.POST.get('dateDebut')), date_format)
         dateFin = datetime.datetime.strptime(str(request.POST.get('dateFin')), date_format)
-        diff = dateFin - dateDebut
-        prix = request.POST.get('prix')
+        diff = dateFin - dateDebut ## differnce entre les dates
+        prix = request.POST.get('prix') ## post.get jabt lina data li dkhlna f input dyal les prix
         montant = int(diff.days) * int(prix)
         fac = Facture(
             nbrJours=float(diff.days),
@@ -382,7 +382,7 @@ def reserver_car(request, pk):
             prenom=request.POST.get('prenom'),
             montant=float(montant)
 
-        )
+        ) ## hadi drna instance bhaal dik dyal faker , w drna columns dyal table y3mro b dakshi li 7sbna lfo9
         facture = Facture.objects.last()
         r = Reservation(
             dateDebut=request.POST.get('dateDebut'),
@@ -407,8 +407,6 @@ def reserver_car(request, pk):
             fac.save()
             r.save()
             client.save()
-
-            print(facture.id + 1)
             return redirect('cars')
     else:
         form = CarsForm(instance=car)
@@ -441,7 +439,7 @@ def contact(request):
          New message: {} 
          From: {}
          '''.format(data['message'], data['email'])
-        send_mail(data['subject'], message, '', ['ashitorb1@gmail.com'])
+        send_mail(data['subject'], message, '', ['Autogo300@gmail.com'])
     return render(request, "contact.html", {})
 
 
@@ -479,8 +477,7 @@ def facture_pdf(request, pk):
         lines.append("  ")
         lines.append("  ")
         lines.append("  ")
-        lines.append("  Prix en MAD/jour :" + str(r.prix) + "                          Montant total en MAD : " + str(
-            r.facture.montant))
+        lines.append("  Prix en MAD/jour :" + str(r.prix) + "                          Montant total en MAD : " + str( r.facture.montant))
         lines.append(" ")
 
     # loop

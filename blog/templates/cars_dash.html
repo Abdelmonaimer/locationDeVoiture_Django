@@ -61,7 +61,7 @@
             <td>{{ cr.type }}</td>
             <td>{{ cr.color }}</td>
             <td>{{ cr.doors }}</td>
-            <td><img src="{{ cr.image }}" width="180" height="150"/></td>
+            <td><img src="{{ cr.image }}" width="120" height="100"/></td>
             <td>{{ cr.seats }}</td>
                 <td><a class="btn btn-success" href="{% url 'update_car' cr.id %}">Edit</a> <a class="btn btn-danger" href="{% url 'delete_car' cr.id %}" onclick="return confirm('Are you sure you want to delete ?')">Delete</a> </td>
             </tr>
