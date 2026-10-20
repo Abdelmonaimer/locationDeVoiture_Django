@@ -24,11 +24,15 @@
           <a class="nav-link" href="employees">Employees</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
+          <a class="nav-link" href="clients">Clients</a>
         </li>
-
+          <li class="nav-item">
+          <a class="nav-link " href="reservations">Reservations</a>
+        </li>
       </ul>
     </div>
+      <span class="me-1">Hello, {{ request.user }}</span>
+      <span><a href="{% url 'logout' %}" style="color: black; text-decoration-line: none"><b>/ Logout</b></a> </span>
   </div>
 </nav>
 </header>
